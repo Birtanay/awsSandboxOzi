@@ -1,6 +1,6 @@
 ## It is failing
 
-### Error
+### Current Error
 
 Error applying plan:
 
@@ -22,3 +22,37 @@ Terraform does not automatically rollback in the face of errors.
 Instead, your Terraform state file has been partially updated with
 any resources that successfully completed. Please address the error
 above and apply again to incrementally change your infrastructure.
+
+
+## Next error
+
+When you remove available_zones from aws_autoscaling_group it completes, but this time service under ecs cluster cannot find any instance to run tasks on. 
+
+## Other errors
+
+### Error
+
+* aws_launch_configuration.ecs_launch_configuration: Error creating launch configuration: ValidationError: The key pair 'MyKeyPair' does not exist
+        status code: 400, request id: 59694c21-8063-11e7-b945-c313b3cdc9e8
+
+### Solution
+
+I created a new keypair and used that
+
+### Error
+
+* aws_autoscaling_group.ecs_autoscaling_group: Error creating AutoScaling Group: ValidationError: The subnet ID 'vpc-113e6b68' does not exist
+        status code: 400, request id: 3536d34b-80e9-11e7-b34e-b18df4e78a9b
+
+### Solution
+
+Autoscaling group parameter corrected. previously vpc_zone_identifier was showing vpc id, it is changed to subnet id
+
+### Error
+
+* aws_ecs_service.hello_world_service: InvalidParameterException: Unable to assume role and validate the listeners configured on your load balancer. Please verify that the ECS service role being passed has the proper permissions.
+        status code: 400, request id: 637117f9-8275-11e7-b3c1-43cdf17362f4 "hello-world"
+ 
+### Solution
+
+I don't remember. I am not sure that I resolved this one.
