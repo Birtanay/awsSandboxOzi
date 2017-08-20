@@ -1,6 +1,2 @@
 access_key = "XXXXXXXXXX"
 secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-region = "us-east-1"
-amiid = "ami-d61027ad"
-instance_type="t2.micro"
-availability_zone="us-east-1a"

@@ -1,6 +1,14 @@
 variable "access_key" {}
 variable "secret_key" {}
-variable "region" {}
-variable "amiid" {}
-variable "availability_zone" {}
-variable "instance_type" {}
+
+variable "region" {
+  default = "us-east-1"
+}
+
+variable "amiid" {
+  default = "ami-d61027ad"
+}
+
+variable "instance_type" {
+  default = "t2.micro"
+}
