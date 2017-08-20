@@ -1,2 +1,2 @@
-access_key = "XXXXXXXXXX"
-secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+access_key = "XXXXXXXxxxx"
+secret_key = "XXXXXXXXXXXXXXXXXXXXXx"
