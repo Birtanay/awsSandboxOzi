@@ -46,7 +46,8 @@ resource "aws_route_table_association" "container_subnet_route_association" {
 resource "aws_security_group" "ssh_http_from_to_anywhere" {
   name        = "ssh_and_http_from_and_to_anywhere"
   description = "Allow all traffic in and out"
-  vpc_id      = "${aws_vpc.container_vpc.id}"
+
+  #vpc_id      = "${aws_vpc.container_vpc.id}"
 
   ingress {
     from_port   = 22
@@ -54,28 +55,27 @@ resource "aws_security_group" "ssh_http_from_to_anywhere" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+  lifecycle {
+    create_before_destroy = true
+  }
   tags {
     Name = "ssh-and-http-from-and-to-anywhere"
   }
@@ -88,9 +88,11 @@ resource "aws_ecs_cluster" "main_cluster" {
 # health_check target might cause trouble
 
 resource "aws_elb" "main_load_balancer" {
-  name            = "ecs-load-balancer"
-  security_groups = ["${aws_security_group.ssh_http_from_to_anywhere.id}"]
-  subnets         = ["${aws_subnet.container_subnet.id}"]
+  name               = "ecs-load-balancer"
+  security_groups    = ["${aws_security_group.ssh_http_from_to_anywhere.id}"]
+  availability_zones = ["${data.aws_availability_zones.all.names}"]
+
+  # subnets         = ["${aws_subnet.container_subnet.id}"]
 
   listener {
     lb_protocol       = "http"
@@ -98,7 +100,6 @@ resource "aws_elb" "main_load_balancer" {
     instance_protocol = "http"
     instance_port     = 8000
   }
-
   health_check {
     target              = "HTTP:80/"
     timeout             = 5
@@ -106,7 +107,6 @@ resource "aws_elb" "main_load_balancer" {
     unhealthy_threshold = 2
     healthy_threshold   = 10
   }
-
   tags {
     Name = "ecs-load-balancer"
   }
@@ -151,14 +151,19 @@ resource "aws_iam_instance_profile" "ecs" {
 }
 
 resource "aws_launch_configuration" "ecs_launch_configuration" {
-  name                        = "ecs-launch-configuration"
-  image_id                    = "${var.amiid}"
-  instance_type               = "${var.instance_type}"
-  security_groups             = ["${aws_security_group.ssh_http_from_to_anywhere.id}"]
-  iam_instance_profile        = "${aws_iam_instance_profile.ecs.name}"
-  key_name                    = "ContainerECSOzi"
-  associate_public_ip_address = true
-  user_data                   = "#!/bin/bash\necho ECS_CLUSTER='${aws_ecs_cluster.main_cluster.name}' > /etc/ecs/ecs.config"
+  name                 = "ecs-launch-configuration"
+  image_id             = "${var.amiid}"
+  instance_type        = "${var.instance_type}"
+  security_groups      = ["${aws_security_group.ssh_http_from_to_anywhere.id}"]
+  iam_instance_profile = "${aws_iam_instance_profile.ecs.name}"
+  key_name             = "ContainerECSOzi"
+
+  #  associate_public_ip_address = true
+  user_data = "#!/bin/bash\necho ECS_CLUSTER='${aws_ecs_cluster.main_cluster.name}' > /etc/ecs/ecs.config"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 data "aws_availability_zones" "all" {}
@@ -170,12 +175,10 @@ resource "aws_autoscaling_group" "ecs_autoscaling_group" {
   max_size             = 5
   desired_capacity     = 4
   health_check_type    = "ELB"
-  launch_configuration = "${aws_launch_configuration.ecs_launch_configuration.name}"
-  vpc_zone_identifier  = ["${aws_subnet.container_subnet.id}"]
+  load_balancers       = ["${aws_elb.main_load_balancer.name}"]
+  launch_configuration = "${aws_launch_configuration.ecs_launch_configuration.id}"
 
-  lifecycle {
-    create_before_destroy = true
-  }
+  #  vpc_zone_identifier  = ["${aws_subnet.container_subnet.id}"]
 }
 
 resource "aws_ecs_task_definition" "hello_world_task" {
