@@ -1,6 +1,6 @@
 ## It is failing
 
-### Current Error
+### Current Error (using custom vpc settings, it might be related with not to create subnet for each available zone in region)
 
 Error applying plan:
 
