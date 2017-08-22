@@ -1,8 +1,9 @@
 variable "access_key" {}
 variable "secret_key" {}
+data "aws_availability_zones" "available" {}
 
 variable "region" {
-  default = "us-east-1"
+  default = "us-west-2"
 }
 
 variable "amiid" {

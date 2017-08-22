@@ -25,7 +25,7 @@ resource "aws_eip" "eip_zone2" {
 
 resource "aws_subnet" "public_subnet_zone1" {
   vpc_id            = "${aws_vpc.vpc_ozi.id}"
-  availability_zone = "us-east-1a"
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
   cidr_block        = "${var.public_subnet_zone1_cidr}"
 
   tags {
@@ -35,7 +35,7 @@ resource "aws_subnet" "public_subnet_zone1" {
 
 resource "aws_subnet" "public_subnet_zone2" {
   vpc_id            = "${aws_vpc.vpc_ozi.id}"
-  availability_zone = "us-east-1b"
+  availability_zone = "${data.aws_availability_zones.available.names[1]}"
   cidr_block        = "${var.public_subnet_zone2_cidr}"
 
   tags {
@@ -45,7 +45,7 @@ resource "aws_subnet" "public_subnet_zone2" {
 
 resource "aws_subnet" "private_subnet_zone1" {
   vpc_id            = "${aws_vpc.vpc_ozi.id}"
-  availability_zone = "us-east-1a"
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
   cidr_block        = "${var.private_subnet_zone1_cidr}"
 
   tags {
@@ -55,7 +55,7 @@ resource "aws_subnet" "private_subnet_zone1" {
 
 resource "aws_subnet" "private_subnet_zone2" {
   vpc_id            = "${aws_vpc.vpc_ozi.id}"
-  availability_zone = "us-east-1b"
+  availability_zone = "${data.aws_availability_zones.available.names[1]}"
   cidr_block        = "${var.private_subnet_zone2_cidr}"
 
   tags {
