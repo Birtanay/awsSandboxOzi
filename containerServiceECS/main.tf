@@ -101,7 +101,7 @@ resource "aws_elb" "main_load_balancer" {
     instance_port     = 8000
   }
   health_check {
-    target              = "HTTP:80/"
+    target              = "HTTP:8000/"
     timeout             = 5
     interval            = 30
     unhealthy_threshold = 2
