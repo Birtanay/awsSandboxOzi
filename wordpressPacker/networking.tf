@@ -141,7 +141,7 @@ resource "aws_route_table_association" "route_table_assoc_private_zone2" {
 
 resource "aws_route53_zone" "wordpress_ael" {
   name   = "wordpress.ael."
-  vpc_id = "${aws_vpc.vpc_wordpress.id}"
+  vpc_id = "${aws_vpc.vpc_ozi.id}"
 }
 
 resource "aws_route53_record" "db_wordpress_ael" {

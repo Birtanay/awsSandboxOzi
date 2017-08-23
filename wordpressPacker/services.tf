@@ -31,7 +31,7 @@ data "template_file" "wordpress_task" {
   }
 }
 
-resource "aws_db_instance" "rds" {
+resource "aws_db_instance" "rds_db_instance" {
   allocated_storage      = 5
   engine                 = "mysql"
   engine_version         = "5.6.27"
@@ -41,4 +41,5 @@ resource "aws_db_instance" "rds" {
   password               = "myverystrongpassword"
   db_subnet_group_name   = "${aws_db_subnet_group.rds_db_subnet.name}"
   vpc_security_group_ids = ["${aws_security_group.rds_security_group_ingress.id}"]
+  skip_final_snapshot    = "true"
 }

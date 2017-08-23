@@ -25,7 +25,7 @@
     "mountPoints": [
       {
         "ContainerPath": "/var/www/html/",
-        "SourceVolume": "nfs-storage"
+        "SourceVolume": "storage-container"
       }
     ],
     "portMappings": [
