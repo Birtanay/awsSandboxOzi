@@ -5,7 +5,7 @@ resource "aws_launch_configuration" "ec2_launch_configuration" {
   security_groups      = ["${aws_security_group.ecs_security_group_ingress.id}", "${aws_security_group.ec2_security_group_egress.id}"]
   iam_instance_profile = "${aws_iam_instance_profile.ecs.name}"
 
-  #user_data            = "${data.template_file.ec2_userdata.rendered}"
+  user_data = "${data.template_file.ec2_userdata.rendered}"
 }
 
 # We need this 'depend_on' line otherwise we may not be able to reach internet at first terraform apply command
@@ -45,7 +45,6 @@ data "template_file" "ec2_userdata" {
   template = "${file("userdata.sh")}"
 
   vars {
-    #  ecs_cluster = "${aws_ecs_cluster.ecs.name}"
-    ecs_cluster = "my-cluster"
+    ecs_cluster = "${aws_ecs_cluster.ecs_cluster_ozi.name}"
   }
 }
