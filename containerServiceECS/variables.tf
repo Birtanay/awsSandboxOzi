@@ -6,6 +6,8 @@ variable "region" {
   default = "us-east-1"
 }
 
+data "aws_availability_zones" "available" {}
+
 variable "amiid" {
   default = "ami-d61027ad"
 }
