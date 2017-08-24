@@ -1,6 +1,12 @@
 ## It is failing
 
-### Current Error (using custom vpc settings, it might be related with not to create subnet for each available zone in region)
+### Current Error
+
+It is creating infrastructure fine. But ecs-service cannot connect to ec2 instances. When you check service events, this error shows up. It might be related with ecr repository
+
+service hello-world was unable to place a task because no container instance met all of its requirements. Reason: No Container Instances were found in your cluster.
+
+### Error (using custom vpc settings, it might be related with not to create subnet for each available zone in region)
 
 Error applying plan:
 
