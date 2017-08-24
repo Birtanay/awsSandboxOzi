@@ -18,3 +18,19 @@ Simple script that creates Lambda Function for python. Simply zip py file and pu
 
 ### components
 aws_iam_role, aws_lambda_function
+
+## Creating custom docker container environment
+Simple script that creates a custom docker container and related environment 
+
+It is not working
+
+### components
+aws_vpc, aws_subnet, aws_internet_gateway, aws_route_table, aws_route_table_association, aws_security_group, aws_ecs_cluster, aws_elb, aws_iam_policy_document, aws_iam_role, aws_iam_role_policy, aws_iam_instance_profile, aws_launch_configuration, aws_autoscaling_group, aws_ecs_task_definition, aws_ecs_service, 
+
+## Creating wordpress environment 
+Simple script that creates fully functional wordpress environment
+
+I am on that
+
+### components
+aws_vpc, aws_internet_gateway, aws_eip, aws_subnet, aws_db_subnet_group, aws_nat_gateway, aws_route_table, aws_route_table_association, aws_route53_zone, aws_route53_record, aws_iam_role, aws_iam_role_policy_attachment, aws_iam_instance_profile, aws_security_group_rule, aws_security_group, aws_launch_configuration, aws_autoscaling_group, aws_elb, aws_ecr_repository, aws_ecs_cluster, aws_ecs_service, aws_ecs_task_definition, aws_db_instance, aws_efs_file_system, aws_efs_mount_target, 
