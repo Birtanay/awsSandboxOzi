@@ -12,3 +12,5 @@ variable "amiid" {
 variable "instance_type" {
   default = "t2.micro"
 }
+
+data "aws_availability_zones" "all" {}
