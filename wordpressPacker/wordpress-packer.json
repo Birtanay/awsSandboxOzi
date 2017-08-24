@@ -16,10 +16,6 @@
     {
       "type": "shell",
       "inline": ["apt-get update", "apt-get install -y python2.7", "ln -s /usr/bin/python2.7 /usr/bin/python"]
-    },
-    {
-      "type": "ansible",
-      "playbook_file": "playbook.yml"
     }
   ],
   "post-processors": [
