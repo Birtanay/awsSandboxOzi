@@ -7,7 +7,7 @@ variable "region" {
 }
 
 variable "amiid" {
-  default = "ami-022b9262"
+  default = "ami-abc579d8"
 }
 
 variable "instance_type" {
