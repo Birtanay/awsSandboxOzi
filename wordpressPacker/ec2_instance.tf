@@ -1,7 +1,7 @@
 resource "aws_launch_configuration" "ec2_launch_configuration" {
   name                 = "ecs-launch-configuration"
   instance_type        = "${var.instance_type}"
-  image_id             = "${var.amiid}"
+  image_id             = "${lookup(var.AMIS,var.region)}"
   security_groups      = ["${aws_security_group.ecs_security_group_ingress.id}", "${aws_security_group.ec2_security_group_egress.id}"]
   iam_instance_profile = "${aws_iam_instance_profile.ecs.name}"
 

@@ -6,8 +6,11 @@ variable "region" {
   default = "us-west-2"
 }
 
-variable "amiid" {
-  default = "ami-022b9262"
+variable "AMIS" {
+  type="map"
+  default={
+    us-west-2="ami-022b9262"
+  }
 }
 
 variable "instance_type" {
