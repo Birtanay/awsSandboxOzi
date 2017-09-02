@@ -8,3 +8,11 @@ resource "aws_key_pair" "provisioner" {
   key_name = "terransible_provisioner"
   public_key = "${file("keys/mykey.pub")}"
 }
+
+terraform {
+  backend "s3" {
+    bucket="terraform-remote-ozi"
+    key="terraform/myproject"
+    region="us-east-1"
+  }
+}

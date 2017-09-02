@@ -27,7 +27,7 @@ resource "aws_subnet" "public_subnet_zone1" {
   vpc_id            = "${aws_vpc.vpc_ozi.id}"
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
   cidr_block        = "${var.public_subnet_zone1_cidr}"
-
+  map_public_ip_on_launch="true"
   tags {
     Name = "public-subnet-zone-1"
   }
@@ -37,6 +37,7 @@ resource "aws_subnet" "public_subnet_zone2" {
   vpc_id            = "${aws_vpc.vpc_ozi.id}"
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
   cidr_block        = "${var.public_subnet_zone2_cidr}"
+  map_public_ip_on_launch="true"
 
   tags {
     Name = "public-subnet-zone-2"
@@ -47,6 +48,7 @@ resource "aws_subnet" "private_subnet_zone1" {
   vpc_id            = "${aws_vpc.vpc_ozi.id}"
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
   cidr_block        = "${var.private_subnet_zone1_cidr}"
+  map_public_ip_on_launch="false"
 
   tags {
     Name = "private-subnet-zone-1"
@@ -57,6 +59,7 @@ resource "aws_subnet" "private_subnet_zone2" {
   vpc_id            = "${aws_vpc.vpc_ozi.id}"
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
   cidr_block        = "${var.private_subnet_zone2_cidr}"
+  map_public_ip_on_launch="false"
 
   tags {
     Name = "private-subnet-zone-2"
