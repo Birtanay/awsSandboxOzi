@@ -10,7 +10,7 @@ resource "aws_autoscaling_group" "ozi_asg" {
   name                 = "my-autoscaling"
   vpc_zone_identifier  = ["${aws_subnet.my_public_subnet.id}"]
   launch_configuration = "${aws_launch_configuration.ozi_launch_configuration.name}"
-  min_size             = 2
+  min_size             = 1
   max_size             = 3
   health_check_grace_period = 300
   health_check_type = "EC2"
