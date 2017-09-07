@@ -20,3 +20,5 @@ above and apply again to incrementally change your infrastructure.
 ## Solution
 
 https://github.com/hashicorp/terraform/issues/5417
+
+Edit terraform.tfstate file, change "skip_final_snapshot = false" to "skip_final_snapshot = true"
