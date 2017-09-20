@@ -1,6 +1,14 @@
 # awsSandboxOzi
 Several AWS terraform examples
 
+## Don't Forget to Run
+
+1. terraform get
+2. terraform init
+3. terraform plan -out plan.out
+4. terraform apply plan.out
+5. terraform destroy
+
 ## Creating Linux Box
 Simple script that creates Linux box.
 
