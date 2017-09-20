@@ -1,6 +1,6 @@
-resource "aws_security_group" "Tutorial_01_asg" {
+resource "aws_security_group" "mysecuritygroup" {
   name = "AWSTutorial01"
-  vpc_id = "${aws_vpc.my_vpc.id}"
+  vpc_id = "${module.vpc.vpc_id}"
   ingress {
     from_port = 22
     to_port = 22
