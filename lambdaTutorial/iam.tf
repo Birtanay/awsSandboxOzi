@@ -14,9 +14,9 @@ resource "aws_iam_role_policy_attachment" "PolicyRoleAttachement" {
 }
 
 data "template_file" "lambdapolicyfile" {
-  template = "${file("lambdapolicy.json")}"
+  template = "${file("json/lambdapolicy.json")}"
 }
 
 data "template_file" "lambdarolefile" {
-  template = "${file("lambdarole.json")}"
+  template = "${file("json/lambdarole.json")}"
 }

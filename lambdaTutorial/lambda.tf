@@ -4,7 +4,7 @@ resource "aws_lambda_function" "newpostlambda" {
     function_name = "PostReader_NewPost"
     role = "${aws_iam_role.LambdaPostReaderRole.arn}"
     handler = "newposts.lambda_handler"
-    source_code_hash = "${base64sha256(file("newposts.zip"))}"
+    source_code_hash = "${base64sha256(file("code/newposts.zip"))}"
     environment {
         variables = {
             DB_TABLE_NAME = "${var.dbtablename}"
@@ -20,7 +20,7 @@ resource "aws_lambda_function" "converttoaudiolambda" {
     role = "${aws_iam_role.LambdaPostReaderRole.arn}"
     handler = "convertoaudio.lambda_handler"
     timeout = 300
-    source_code_hash = "${base64sha256(file("convertoaudio.zip"))}"
+    source_code_hash = "${base64sha256(file("code/convertoaudio.zip"))}"
     environment {
         variables = {
             DB_TABLE_NAME = "${var.dbtablename}"

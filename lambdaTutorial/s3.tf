@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "audiobucket" {
 resource "aws_s3_bucket_object" "indexfile" {
   bucket = "${var.webbucketname}"
   key    = "index.html"
-  source = "index.html"
+  source = "code/index.html"
   content_type = "text/html"
   depends_on = ["aws_api_gateway_deployment.example_deployment_dev"]
 }
@@ -34,13 +34,13 @@ resource "aws_s3_bucket_object" "scriptsfile" {
 resource "aws_s3_bucket_object" "stylesfile" {
   bucket = "${var.webbucketname}"
   key    = "styles.css"
-  source = "styles.css"
+  source = "code/styles.css"
   content_type = "text/css"
   depends_on = ["aws_api_gateway_deployment.example_deployment_dev"]
 }
 
 data "template_file" "bucketpolicy" {
-  template = "${file("bucketpolicy.json")}"
+  template = "${file("json/bucketpolicy.json")}"
 
   vars {
     bucket_name = "${var.webbucketname}"
@@ -48,7 +48,7 @@ data "template_file" "bucketpolicy" {
 }
 
 data "template_file" "scriptsfiletemplate" {
-  template = "${file("scripts.js")}"
+  template = "${file("code/scripts.js")}"
   depends_on = ["aws_api_gateway_deployment.example_deployment_dev"]
   vars {
     api_endpoint = "https://${aws_api_gateway_deployment.example_deployment_dev.rest_api_id}.execute-api.${var.region}.amazonaws.com/${aws_api_gateway_deployment.example_deployment_dev.stage_name}"
