@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "newpostlambda" {
-    filename         = "newposts.zip"
+    filename         = "code/newposts.zip"
     runtime = "python2.7"
     function_name = "PostReader_NewPost"
     role = "${aws_iam_role.LambdaPostReaderRole.arn}"
@@ -14,7 +14,7 @@ resource "aws_lambda_function" "newpostlambda" {
 }
 
 resource "aws_lambda_function" "converttoaudiolambda" {
-    filename         = "convertoaudio.zip"
+    filename         = "code/convertoaudio.zip"
     runtime = "python2.7"
     function_name = "PostReader_ConvertToAudio"
     role = "${aws_iam_role.LambdaPostReaderRole.arn}"
@@ -30,12 +30,12 @@ resource "aws_lambda_function" "converttoaudiolambda" {
 }
 
 resource "aws_lambda_function" "getpostslambda" {
-    filename         = "getposts.zip"
+    filename         = "code/getposts.zip"
     runtime = "python2.7"
     function_name = "PostReader_GetPosts"
     role = "${aws_iam_role.LambdaPostReaderRole.arn}"
     handler = "getposts.lambda_handler"
-    source_code_hash = "${base64sha256(file("getposts.zip"))}"
+    source_code_hash = "${base64sha256(file("code/getposts.zip"))}"
     environment {
         variables = {
             DB_TABLE_NAME = "${var.dbtablename}"

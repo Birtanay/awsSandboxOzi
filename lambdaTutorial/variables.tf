@@ -16,3 +16,6 @@ variable "audiobucketname" {
 variable "dbtablename" {
   default = "posts"
 }
+variable "integration_response_template" {
+  default = "Empty"
+}
