@@ -15,10 +15,42 @@ resource "aws_s3_bucket" "audiobucket" {
     force_destroy       =   true
 }
 
+resource "aws_s3_bucket_object" "indexfile" {
+  bucket = "${var.webbucketname}"
+  key    = "index.html"
+  source = "index.html"
+  content_type = "text/html"
+  depends_on = ["aws_api_gateway_deployment.example_deployment_dev"]
+}
+
+resource "aws_s3_bucket_object" "scriptsfile" {
+  bucket = "${var.webbucketname}"
+  key    = "scripts.js"
+  content = "${data.template_file.scriptsfiletemplate.rendered}"
+  content_type = "application/javascript"
+  depends_on = ["aws_api_gateway_deployment.example_deployment_dev"]
+}
+
+resource "aws_s3_bucket_object" "stylesfile" {
+  bucket = "${var.webbucketname}"
+  key    = "styles.css"
+  source = "styles.css"
+  content_type = "text/css"
+  depends_on = ["aws_api_gateway_deployment.example_deployment_dev"]
+}
+
 data "template_file" "bucketpolicy" {
   template = "${file("bucketpolicy.json")}"
 
   vars {
     bucket_name = "${var.webbucketname}"
+  }
+}
+
+data "template_file" "scriptsfiletemplate" {
+  template = "${file("scripts.js")}"
+  depends_on = ["aws_api_gateway_deployment.example_deployment_dev"]
+  vars {
+    api_endpoint = "https://${aws_api_gateway_deployment.example_deployment_dev.rest_api_id}.execute-api.${var.region}.amazonaws.com/${aws_api_gateway_deployment.example_deployment_dev.stage_name}"
   }
 }
