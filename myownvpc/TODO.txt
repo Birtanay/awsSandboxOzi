@@ -1,0 +1,3 @@
+- Check ec2 web instance internet connection
+- Check that you can ping from ec2 web to ec2 mysql
+- Check security group webdmz egress rules
