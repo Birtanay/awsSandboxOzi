@@ -11,8 +11,8 @@ resource "aws_key_pair" "provisioner" {
 
 terraform {
   backend "s3" {
-    bucket = "terraform-remote-jenkins"
-    key    = "terraform/jenkins-tfstate"
+    bucket = "terraform-remote-state-387746"
+    key    = "aws10/jenkins-tfstate"
     region = "us-east-1"
   }
 }
