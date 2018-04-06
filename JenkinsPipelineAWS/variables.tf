@@ -3,7 +3,7 @@ variable "secret_key" {}
 data "aws_availability_zones" "available" {}
 
 variable "region" {
-  default = "eu-west-1"
+  default = "us-east-1"
 }
 
 variable "aws_amis" {
@@ -28,7 +28,7 @@ variable "aws_amis" {
 }
 
 variable "availability_zones" {
-  default = "eu-west-1a,eu-west-1b"
+  default = "us-east-1a,us-east-1b"
 }
 
 variable "env_name" {
