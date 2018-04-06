@@ -120,6 +120,8 @@ for each in "
     blueocean
     job-import-plugin
     slack
+    role-strategy
+    pipeline-utility-steps
 ";
 do
     java -jar /root/jenkins-cli.jar -s http://localhost:8080/ install-plugin $each ;
