@@ -1,11 +1,13 @@
-variable "aws_region" {
-  default = "us-west-2"
+variable "AWS_ACCESS_KEY" {}
+variable "AWS_SECRET_KEY" {}
+variable "region" {
+  default = "eu-west-2"
   }
 
 variable "AMIS" {
   type="map"
   default={
-    us-west-2="ami-7105e609"
+    eu-west-2="ami-01419b804382064e4"
   }
 }
   

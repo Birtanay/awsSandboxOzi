@@ -1,6 +1,6 @@
 output "address" {
-  value = "${aws_instance.Tutorial_01_instance.public_dns}"
+  value = "${aws_instance.myLinuxInstance.public_dns}"
 }
 output "ip" {
-  value = "${aws_instance.Tutorial_01_instance.public_ip}"
+  value = "${aws_instance.myLinuxInstance.public_ip}"
 }

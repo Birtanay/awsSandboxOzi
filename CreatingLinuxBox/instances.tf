@@ -6,6 +6,6 @@ resource "aws_instance" "myLinuxInstance" {
   key_name = "${aws_key_pair.mykey.key_name}"  
   iam_instance_profile = "${aws_iam_instance_profile.s3_ozi_bucket_instance_profile.name}"  
   tags {
-	 "Name" = "AWS_Tutorial_01"
+	 "Name" = "AWS_LinuxBox_Oguz"
   }
 }
